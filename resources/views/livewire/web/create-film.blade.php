@@ -1,6 +1,11 @@
 <div>
     <div class="max-w-screen-lg mx-auto px-4 py-8">
-        <form class="w-full px-4 py-8 bg-zinc-100 text-zinc-950 rounded-lg space-y-4">
+        
+        @if (session()->has('message'))
+        <div class="alert alert-success">{{ session('message') }}</div>
+        @endif
+
+        <form wire:submit.prevent="createFilm" class="w-full px-4 py-8 bg-zinc-100 text-zinc-950 rounded-lg space-y-4">
             <h1 class="text-2xl font-bold text-center font-film">
                 Cadastrar Filme
             </h1>
@@ -9,21 +14,22 @@
                 <label for="title" class="font-semibold">
                     Título
                 </label>
-                <input type="text" id="title" class="rounded-lg border border-zinc-950 p-2">
+                <input type="text" id="title" wire:model="title" class="rounded-lg border border-zinc-950 p-2">
+                @error('title') <span class="text-red-500">{{ $message }}</span> @enderror
             </div>
 
             <div class="flex flex-col gap-2">
                 <label for="summary" class="font-semibold">
                     Resumo
                 </label>
-                <textarea id="summary" rows="6" class="rounded-lg border border-zinc-950 p-2"></textarea>
+                <textarea id="summary" wire:model="summary" rows="6" class="rounded-lg border border-zinc-950 p-2"></textarea>
             </div>
 
             <div class="flex flex-col gap-2">
                 <label for="cover" class="font-semibold">
                     Capa
                 </label>
-                <input type="file" id="cover" class="rounded-lg border border-zinc-950 p-2">
+                <input type="file" id="cover" wire:model="cover" class="rounded-lg border border-zinc-950 p-2">
             </div>
 
             <button type="submit"
