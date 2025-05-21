@@ -24,17 +24,16 @@ class CreateFilm extends Component
     {
 
         $this->validate();
-        
+
         $coverPath = $this->cover->store('covers', 'public');
 
-        Film::create([
+        $film = Film::create([
             'title' => $this->title,
             'summary' => $this->summary,
             'cover' => $coverPath,
         ]);
 
-        $this->reset();
-        session()->flash('message', 'Filme cadastrado com sucesso!');
+        return redirect()->route('see', ['id' => $film->id]);
     }
 
     public function render()

@@ -10,7 +10,7 @@
                 class="h-64 w-full">
             <div class="p-6 flex flex-col flex-grow">
                 <h2 class="text-xl font-semibold text-white mb-2">{{ $film->title }}</h2>
-                <p class="text-gray-300 flex-grow">{{ Str::limit($film->summary, 120, '...') }}</p>
+                <a href="{{ route('see', ['id' => $film->id]) }}" class="text-red-500 font-semibold">Detalhes</a>
             </div>
         </div>
         @endforeach
