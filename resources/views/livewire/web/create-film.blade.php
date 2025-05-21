@@ -1,6 +1,6 @@
 <div>
     <div class="max-w-screen-lg mx-auto px-4 py-8">
-        
+
         @if (session()->has('message'))
         <div class="alert alert-success">{{ session('message') }}</div>
         @endif
@@ -23,6 +23,8 @@
                     Resumo
                 </label>
                 <textarea id="summary" wire:model="summary" rows="6" class="rounded-lg border border-zinc-950 p-2"></textarea>
+                @error('summary') <span class="text-red-500">{{ $message }}</span> @enderror
+
             </div>
 
             <div class="flex flex-col gap-2">
@@ -30,6 +32,8 @@
                     Capa
                 </label>
                 <input type="file" id="cover" wire:model="cover" class="rounded-lg border border-zinc-950 p-2">
+                @error('cover') <span class="text-red-500">{{ $message }}</span> @enderror
+
             </div>
 
             <button type="submit"

@@ -17,17 +17,20 @@ class CreateFilm extends Component
     protected $rules = [
         'title' => 'required|string|max:255',
         'summary' => 'required|string',
-        'cover' => 'required|Image|max:2048',
+        'cover' => 'required|image|max:2048',
     ];
 
     public function createFilm()
     {
+
         $this->validate();
+        
+        $coverPath = $this->cover->store('covers', 'public');
 
         Film::create([
             'title' => $this->title,
             'summary' => $this->summary,
-            'cover' => $this->cover,
+            'cover' => $coverPath,
         ]);
 
         $this->reset();
